@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "C:\\Users\\12068\\.conda\\envs\\cy\\Lib\\site-packages"
+    ]
+}

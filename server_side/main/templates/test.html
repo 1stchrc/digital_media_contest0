@@ -1,0 +1,41 @@
+<html>
+    <body>
+        <button id="B">BUTTON</button>
+        <script>
+            var ws = new WebSocket(
+                'ws://'
+                + window.location.host
+                + '/ws/chat/'
+            );
+            ws.onopen = (e) => {
+                ws.send(JSON.stringify({
+                    type : "BEGIN",
+                    data : {
+                        user_id : "FX"
+                    }
+                }));
+                setInterval(()=>{
+                    ws.send(JSON.stringify({
+                        type : "HEARTBEAT",
+                        data : {}
+                    }));
+                }, 90000);
+            };
+            ws.onmessage = function(e) {
+                console.log(e.data);
+            };
+            ws.onclose = function(e) {
+                console.error('Chat socket closed unexpectedly');
+            };
+            var B = document.querySelector("#B");
+            B.onclick = () => {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/post/");
+                xhr.send(JSON.stringify({
+                    to : "FX",
+                    content : "?????"
+                }));
+            };
+        </script>
+    </body>
+</html>
