@@ -6,14 +6,16 @@
 				this.globalData.userInfo = (await uni.getStorage({
 					key : "user_info"
 				})).data;
-				try{
-					await this.globalData.guaranteedLogin(this.globalData.userInfo);
-				}catch{
-					uni.showToast({
-						icon:"error",
-						title:"无法连接到服务器",
-						duration : 1000,
-					})
+				if(this.globalData.userInfo !== null){
+					try{
+						await this.globalData.guaranteedLogin(this.globalData.userInfo);
+					}catch{
+						uni.showToast({
+							icon:"error",
+							title:"无法连接到服务器",
+							duration : 1000,
+						})
+					}
 				}
 			}catch{}
 		},
@@ -37,39 +39,60 @@
 				while(this.webSocketState === "DISCONNECTED"){
 					try{
 						return await this.login(this.userInfo);
+						}
 					catch{};
 				}
+			},
+			async logout(){
+				try{
+					await uni.setStorage({
+						key : "user_info",
+						data : null,
+					});
+				} catch {
+					console.error("无法写入本地存储");
+				}
+				this.userInfo = null;
+				if(this.webSocketState === "DISCONNECTED"){
+					return;
+				}
+				return new Promise(async res=>{
+					await uni.onSocketClose(()=>{
+						this.webSocketState = "DISCONNECTED";
+						console.log("已登出");
+						res();
+					});
+					await uni.closeSocket({
+						code: 1000,
+					});
+				});
 			},
 			async login(userInfo){
 				if(this.webSocketState === "CONNECTED"){
 					throw null;
 				}
-				const that = this;
-				const heartbeatSender = async function f(){
-					try{
+				const heartbeatSender = async ()=>{
+					while(this.webSocketState == "CONNECTED"){
 						try{
 							await uni.onSocketClose(result => {
 								console.warn("与服务器断开连接");
-								that.webSocketState = "DISCONNECTED";
-								that.guaranteedLogin(that.userInfo);
+								this.webSocketState = "DISCONNECTED";
+								this.guaranteedLogin(this.userInfo);
 							});
-						}catch(e){
-							console.log("?");
-							throw e;
+							while(this.webSocketState == "CONNECTED"){
+								console.log("发送心跳包...");
+								uni.sendSocketMessage({
+									data: JSON.stringify({
+										type : "HEARTBEAT",
+										data : {},
+									})
+								});
+								await this.timeout(150 * 1000);
+							}
+							return;
+						}catch{
+							console.warn("发送心跳包出错, 重新发送...");
 						}
-						while(that.webSocketState == "CONNECTED"){
-							console.log("发送心跳包...");
-							uni.sendSocketMessage({
-								data: JSON.stringify({
-									type : "HEARTBEAT",
-									data : {},
-								})
-							});
-							await that.timeout(150 * 1000);
-						}
-					}catch{
-						console.warn("发送心跳包出错, 重新发送...");
-						return await f();
 					}
 				}
 				console.log("尝试登录...");
@@ -110,12 +133,14 @@
 								break;
 							}
 							default:{
+								console.log("登录被拒绝!");
 								res(false);
 								break;
 							}
 						}
 					});
 					uni.onSocketClose(msg=>{
+						console.warn("登录时断开连接。");
 						rej(msg);
 					});
 				});

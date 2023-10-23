@@ -21,26 +21,26 @@
 		
 		<view class="tabbar">
 			<view class="tabbar_item">
-				<image class="tabbar_item_image" v-if="selected_page!=0"src="../../static/homepage.png"></image>
+				<image class="tabbar_item_image" v-if="selected_page!=0"src="../../static/homepage.png" @click="selected_page = 0"></image>
 				<image class="tabbar_item_image" v-else src="../../static/homepage_selected.png"></image>
 				<view class="tabbar_text" v-if="selected_page!=0" @click="selected_page = 0">首页</view>
 				<view class="tabbar_text_selected" v-else>首页</view>
 			</view>
 			<view class="tabbar_item">
-				<image class="tabbar_item_image" v-if="selected_page!=1"src="../../static/message.png"></image>
+				<image class="tabbar_item_image" v-if="selected_page!=1"src="../../static/message.png" @click="selected_page = 1"></image>
 				<image class="tabbar_item_image" v-else src="../../static/message_selected.png"></image>
 				<view class="tabbar_text" v-if="selected_page!=1" @click="selected_page = 1">消息</view>
 				<view class="tabbar_text_selected" v-else>消息</view>
 			</view>
 			<image class="tabbar_image" @click="fabu" src='/static/add.png'></image>
 			<view class="tabbar_item">
-				<image class="tabbar_item_image" v-if="selected_page!=2"src="../../static/zudui.png"></image>
+				<image class="tabbar_item_image" v-if="selected_page!=2"src="../../static/zudui.png" @click="selected_page = 2"></image>
 				<image class="tabbar_item_image" v-else src="../../static/zudui_choose.png"></image>
 			<view class="tabbar_text" v-if="selected_page!=2" @click="selected_page = 2">组队</view>
 			<view class="tabbar_text_selected" v-else>组队</view>
 			</view>
 			<view class="tabbar_item">
-				<image class="tabbar_item_image" v-if="selected_page!=3"src="../../static/mypage.png"></image>
+				<image class="tabbar_item_image" v-if="selected_page!=3"src="../../static/mypage.png" @click="selected_page = 3"></image>
 				<image class="tabbar_item_image" v-else src="../../static/mypage_selected.png"></image>
 			<view class="tabbar_text" v-if="selected_page!=3" @click="selected_page = 3">我的</view>
 			<view class="tabbar_text_selected" v-else>我的</view>
@@ -68,7 +68,7 @@
 		},
 		methods:{
 			fabu(){
-				getApp().globalData.navigateTo({
+				uni.navigateTo({
 					url : "/pages/index/fabu",
 				});
 			}

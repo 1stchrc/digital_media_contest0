@@ -5,11 +5,11 @@
 				<view class="search-ico-wapper">
 					<image src="/static/search.png" class="search-ico" mode="heightFix"></image>
 				</view>
-				<input type="text" value="" placeholder="搜索我的关注" class="search-text" maxlength="10" focus/>
+				<input type="text" value="" placeholder="搜索我的团队" class="search-text" maxlength="10" focus/>
 			</view>
 		</view>
 		<view class="title">
-			<view class="title_guanzhu">我的关注({{number}})</view>	
+			<view class="title_guanzhu">我的团队({{number}})</view>	
 		</view>
 		<view class="users">
 			<view class="each-user" v-for="(item,index) in array">

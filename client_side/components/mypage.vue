@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<image class="setting" src="/static/zhuye_jiahao.png"></image>
+		<image class="setting" src="/static/search.png"></image>
 		<image class="myhead" src="/static/logo.png"></image>
 		<view class="items">
 			<view class="item-text">简历</view>

@@ -35,7 +35,7 @@
 				</view>
 			</view>
 		</view>
-		<image class="add" src="../../static/zhuye_jiahao.png"></image>
+		<image class="add" src="../../static/add.png"></image>
 	</view>
 </template>
 

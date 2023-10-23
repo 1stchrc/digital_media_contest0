@@ -34,6 +34,7 @@
 					return;
 				}
 				try{
+					await this.gd.logout();
 					if(!(await this.gd.login({user_id : this.mail, password : this.password}))){
 						uni.showToast({
 							icon:"error",
