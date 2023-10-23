@@ -34,12 +34,15 @@ class UserConsumer(AsyncWebsocketConsumer):
                     del self.future_discard
                     user = await s2a(auth)(msg["data"])
                     if user == None:
+                        print("Bad request.")
+                        await self.send(json.dumps({"type" : "REJECT", "data" : {}}))
                         await self.close()
                         return
                     self.user_id = user.id
                     connected_users[user.id] = self
                     asyncio.create_task(discard_async_loop())
-                    await self.send("Successfully authorized.")
+                    await self.send(json.dumps({"type" : "BEGIN", "data" : {}}))
+                    print(f"User connected: {user.id}")
                 except:
                     await self.close()
         except:

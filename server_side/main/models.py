@@ -2,7 +2,8 @@ from django.db import models
 
 # Create your models here.
 class user_data(models.Model):
-    id = models.CharField(max_length = 64, primary_key=True)
+    id = models.CharField(primary_key=True, max_length=64)
+    name = models.CharField(max_length = 64)
     password = models.CharField(max_length = 64)
     tags = models.JSONField(default=list)
 

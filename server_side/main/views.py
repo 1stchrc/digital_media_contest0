@@ -5,6 +5,7 @@ import json
 from .consumers import connected_users
 from .common import *
 from asgiref.sync import async_to_sync as a2s
+
 # Create your views here.
 def post_message(req):
     req_json = json.loads(req.body)
@@ -21,18 +22,19 @@ def post_message(req):
 
 def register(req):
     req_json = json.loads(req.body)
-    user_id = req_json["user_id"]
-    users = models.user_data.objects.filter(id = user_id)
-    if users.exists():
+    mail = req_json["mail"]
+    if models.user_data.objects.filter(id = mail).exists():
         return HttpResponseForbidden("User already exists.")
     user = models.user_data()
-    user.id = user_id
+    user.id = mail
+    user.name = req_json["username"]
     user.password = req_json["password"]
+    user.save()
     return HttpResponse("Success.")
 
 def create_team(req):
     req_json = json.loads(req.body)
-    user = auth(req_json)
+    user = auth(req_json["user_info"])
     if user == None:
         return HttpResponseNotFound("Authentication failed.")
     
