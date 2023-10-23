@@ -19,30 +19,30 @@
 		<view class="detail">
 			<view class="detail_left">
 				<view class="detail_left_item">
-					123
+					讨论贴
 				</view>
 				<view class="detail_left_item">
-					123
+					讨论贴
 				</view>
 				<view class="detail_left_item">
-					123
+					讨论贴
 				</view>
 				<view class="detail_left_item">
-					123
+					讨论贴
 				</view>
 			</view>
 			<view class="detail_right">
 				<view class="detail_right_item">
-					123
+					讨论贴
 				</view>
 				<view class="detail_right_item">
-					123
+					讨论贴
 				</view>
 				<view class="detail_right_item">
-					123
+					讨论贴
 				</view>
 				<view class="detail_right_item">
-					123
+					讨论贴
 				</view>
 				
 			</view>

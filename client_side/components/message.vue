@@ -1,28 +1,13 @@
 <template>
-	<view>
+	<view style="padding-top: 2vh;background-color: rgb(244,244,244);">
 		<view class="message_sort">
 			<view class="sort_text" @click="clicknotice">通知</view>
-			<view class="sort_text">团队</view>
-			<view class="sort_text">关注</view>
+			<view class="sort_text" @click="clicktuandui">团队</view>
+			<view class="sort_text" @click="clickguanzhu">关注</view>
 		</view>
-		<view class="message_detail">
-			<view class="message_item">
-				消息
-			</view>
-			<view class="message_item">
-				消息
-			</view>
-			<view class="message_item">
-				消息
-			</view>
-			<view class="message_item">
-				消息
-			</view>
-			<view class="message_item">
-				消息
-			</view>
-			<view class="message_item">
-				消息
+		<view class="all">
+			<view class="item" v-for="(item,index) in array">
+				{{item}}
 			</view>
 		</view>
 	</view>
@@ -30,10 +15,25 @@
 
 <script>
 	export default{
+		data() {
+			return {
+				array:["吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码"],
+			}
+		},
 		methods:{
 			clicknotice(){
 				uni.navigateTo({
 					url:"/pages/index/notices"
+				})
+			},
+			clicktuandui(){
+				uni.navigateTo({
+					url:"/pages/index/myteam"
+				})
+			},
+			clickguanzhu(){
+				uni.navigateTo({
+					url:"/pages/index/myguanzhu"
 				})
 			}
 		}
@@ -41,6 +41,25 @@
 </script>
 
 <style>
+	.all{
+		display: flex;
+		flex-direction: column;
+		background-color: rgb(244,244,244);
+		height: fit-content;
+		overflow-y: auto;
+		align-items: center;
+	}
+	.item{
+		display: flex;
+		background-color: rgb(255,255,255);
+		width: 80vw;
+		box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+		margin-top:3vh;
+		border-radius: 20rpx;
+		justify-content: center;
+		align-items: center;
+		height: 10vh;
+	}
 	.message_sort{
 		display: flex;
 		align-items: center;
@@ -48,8 +67,8 @@
 		width: 80vw;
 		height:8vh;
 		justify-content: space-around;
-		margin-top: 2vh;
 		margin-left: 10vw;
+		box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
 	}
 	.sort_text{
 		
