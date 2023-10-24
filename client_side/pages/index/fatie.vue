@@ -6,10 +6,10 @@
 				<image class="touxiang" src="../../static/logo.png"></image>
 				<view class="userid">用户名</view>
 			</view>
-			<input class="biaoti" placeholder="标题"></input>
+			<input class="biaoti" placeholder="标题" v-model="draftInfo.title"></input>
 		</view>
 		<view class="neirong">
-			<textarea class="neirong-text" placeholder="内容"></textarea>
+			<textarea class="neirong-text" placeholder="内容" v-model="draftInfo.content"></textarea>
 		</view>
 		<view class="jiaonang">
 			<view class="huati-yonghu">#话题</view>
@@ -19,10 +19,10 @@
 		<view class="gongkai_or_simi">
 			<image class="simi" src="../../static/simi.png"></image>
 			<view class="simi-text">私密</view>
-			<switch class="switch" :checked="false" style="transform:scale(0.8);"></switch>
+			<switch class="switch" :checked="draftInfo.privateFlag" style="transform:scale(0.8);"></switch>
 		</view>
 		<view class="bottom">
-			<image class="cuncaogao" src="../../static/cuncaogao.png">保存草稿</image>
+			<image class="cuncaogao" src="../../static/cuncaogao.png" @click="saveDraft()">保存草稿</image>
 			<button class="fabu">发布</button>
 		</view>
 	</view>
@@ -30,10 +30,64 @@
 
 <script>
 	export default{
+		async mounted() {
+			this.draftId = this.$route.query.draft_id;
+			if(this.draftId !== undefined){
+				let draft = (await uni.getStorage({
+					key: "posts/drafts/" + this.draftId,
+				})).data;
+				this.draftInfo = draft;
+				this.$forceUpdate();
+			}
+		},
 		data(){
 			return{
-				
+				draftId : undefined,
+				draftInfo : {
+					title : "???",
+					content : "",
+					tags : [],
+					privateFlag : false,
+				},
 			}
+		},
+		methods:{
+			async saveDraft(){
+				let creationFlag = false;
+				if(this.draftId === undefined){
+					try{
+						this.draftId = (await uni.getStorage({
+							key: "posts/drafts_top",
+						})).data;
+						creationFlag = true;
+					}catch{}
+				}
+				if(this.draftId === undefined){
+					creationFlag = true;
+					this.draftId = 0;
+				}
+				let info = {
+					title: this.draftInfo.title, 
+					content: this.draftInfo.content, 
+					tags: this.draftInfo.tags, 
+					privateFlag: this.draftInfo.privateFlag,
+				};
+				await uni.setStorage({
+					key : "posts/drafts/" + this.draftId,
+					data: info,
+				});
+				if(creationFlag){
+					await uni.setStorage({
+						key: "posts/drafts_top",
+						data: this.draftId + 1,
+					});
+					console.log("新建草稿");
+				}
+				uni.showToast({
+					icon: "success",
+					title: "草稿已保存",
+				})
+			},
 		}
 	}
 </script>

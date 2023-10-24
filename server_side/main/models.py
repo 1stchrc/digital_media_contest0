@@ -13,9 +13,21 @@ class message(models.Model):
     content = models.TextField()
 
 class team(models.Model):
+    leader_id = models.CharField(max_length=64)
     members = models.ManyToManyField(to = user_data)
     title = models.TextField(default="WTF Contest")
-    category = models.TextField(default="Maths")
-    tags = models.JSONField(default=list)
+    #category = models.TextField(default="Maths")
+    #tags = models.JSONField(default=list)
     intro = models.TextField(default="Some nice team.")
 
+class post_reply(models.Model):
+    content = models.TextField(default="Nice reply.")
+    author = models.ForeignKey(to = "post", default="", on_delete=models.SET_NULL, null = True)
+
+class post(models.Model):
+    title = models.TextField(default="Nice post.")
+    content = models.TextField(default="Some content...")
+    author_id = models.CharField(max_length=64)
+    tags = models.JSONField(default=list)
+    private_flag = models.BooleanField(default=False)
+    replies = models.ManyToManyField(to = post_reply)

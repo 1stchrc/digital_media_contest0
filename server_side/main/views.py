@@ -37,5 +37,24 @@ def create_team(req):
     user = auth(req_json["user_info"])
     if user == None:
         return HttpResponseNotFound("Authentication failed.")
-    
-    return HttpResponse("ok")
+    team = models.team()
+    team.title = req_json["title"]
+    team.intro = req_json["intro"]
+    team.leader_id = user.id
+    team.members.add(user)
+    team.save()
+    return HttpResponse(str(team.id))
+
+def post(req):
+    req_json = json.loads(req.body)
+    user = auth(req_json["user_info"])
+    if user == None:
+        return HttpResponseNotFound("Authentication failed.")
+    post = models.post()
+    post.author_id = user.id
+    post.title = req_json["title"]
+    post.content = req_json["content"]
+    post.tags = req_json["tags"]
+    post.private_flag = req_json["private_flag"]
+    post.save()
+    return HttpResponse(str(post.id))
