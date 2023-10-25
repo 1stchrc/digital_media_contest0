@@ -1,24 +1,11 @@
 <template>
-	<view>
-		<view class="title">
-			<view class="title_detail">参赛项目</view>
+	<view class="all">
+		<view class="fanhui" @click="fanhui()"><</view>
+		<view class="top">
+			发布组队
 		</view>
-		<view class="sorts">
-			<!-- <view class="sort_position"> -->
-				<view class="sort_item" v-for="(item,index) in array">
-					{{item}}
-				<!-- </view> -->
-			</view>
-		</view>
-		<view class="sorts">
-			<!-- <view class="sort_position"> -->
-				<view class="sort_item" v-for="(item,index) in array">
-					{{item}}
-				</view>
-			<!-- </view> -->
-		</view>
-		<view class="title">
-			<view class="title_detail">项目简介</view>
+		<view class="bisai-zhaomu">
+			* * * 比 赛 招 募
 		</view>
 	</view>
 </template>
@@ -27,47 +14,45 @@
 	export default {
 		data() {
 			return {
-				array:["吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码"]
+				
 			}
 		},
 		onLoad() {
 	
 		},
 		methods: {
-			
+			fanhui(){
+				uni.navigateTo({
+					url:"/pages/index/main"
+				})
+			}
 		}
 	}
 </script>
 
 <style>
-	.title{
+	.fanhui{
+		position: fixed;
+		left: 7vw;
+		top:8vh;
+		font-size: 50rpx;
+	}
+	.all{
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
-		background-color: antiquewhite;
-		height: 8vh;
-		width: 80vw;
-		margin-left: 10vw;
-		justify-content: space-around;
-		margin-top: 3vh;
 	}
-	.title_detail{
-		
-	}
-	.sorts{
+	.top{
 		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
 		justify-content: center;
-		background-color: antiquewhite;
-		width: 78vw;
-		margin-left: 10vw;
-		margin-top: 3vh;
-		padding:10rpx;
+		align-items: center;
+		/* background-color: beige; */
+		width: 90vw;
+		height: 8vh;
+		border-bottom-style: ridge;
 	}
-	.sort_item{
-		height:5vh;
-		width: 15vw;
+	.bisai-zhaomu{
+		width: 86vw;
+		
 	}
 </style>
