@@ -34,7 +34,7 @@
 			<switch class="switch" @change="e=>draftInfo.privateFlag=e.detail" :checked="draftInfo.privateFlag" style="transform:scale(0.8);"></switch>
 		</view>
 		<view class="bottom">
-			<image class="cuncaogao" src="../../static/cuncaogao.png" @click="saveDraft()">保存草稿</image>
+			<image class="cuncaogao" src="../../static/cuncaogao.png" @click="saveDraft()">草稿</image>
 			<button class="fabu" @click="confirm()">发布</button>
 		</view>
 	</view>
@@ -247,7 +247,7 @@
 		bottom:2vh;
 		width: 90vw;
 		height: 8vh;
-		background-color: aliceblue;
+		/* background-color: aliceblue; */
 	}
 	.cuncaogao{
 		margin-left: 2vh;
@@ -256,6 +256,7 @@
 		height: 60rpx;	
 	}
 	.fabu{
+		margin-left: 15vw;
 		display: flex;
 		align-items: center;
 		justify-content: center;
