@@ -18,40 +18,55 @@
 		</view>
 		<view class="detail">
 			<view class="detail_left">
-				<view class="detail_left_item">
-					讨论贴
-				</view>
-				<view class="detail_left_item">
-					讨论贴
-				</view>
-				<view class="detail_left_item">
-					讨论贴
-				</view>
-				<view class="detail_left_item">
-					讨论贴
-				</view>
+				<view v-for="(e, i) in leftContents"
+				:key="i"
+				class="detail_left_item"
+				>{{e.title}}</view>
 			</view>
 			<view class="detail_right">
-				<view class="detail_right_item">
-					讨论贴
-				</view>
-				<view class="detail_right_item">
-					讨论贴
-				</view>
-				<view class="detail_right_item">
-					讨论贴
-				</view>
-				<view class="detail_right_item">
-					讨论贴
-				</view>
-				
+				<view v-for="(e, i) in rightContents"
+				:key="i"
+				class="detail_right_item"
+				>{{e.title}}</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	
+	export default{
+		mounted() {
+			this.getContent();
+		},
+		data(){
+			return {
+				gd: getApp().globalData,
+				leftContents: [],
+				rightContents: [],
+			}
+		},
+		methods:{
+			async getContent(){
+				try{
+					let ret = await uni.request({
+						url: this.gd.serverURL + "/fetch_posts/?post_count=10",
+						method: "GET",
+					});
+					if(ret.statusCode !== 200){
+						console.error("wtf");
+						return;
+					}
+					for(let i = 0; i < ret.data.length; ++i){
+						if(i % 2){
+							this.leftContents.push(ret.data[i]);
+						}else{
+							this.rightContents.push(ret.data[i]);
+						}
+					}
+				}catch{}
+			}
+		}
+	}
 </script>
 
 <style>

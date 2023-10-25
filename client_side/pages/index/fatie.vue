@@ -12,18 +12,30 @@
 			<textarea class="neirong-text" placeholder="内容" v-model="draftInfo.content"></textarea>
 		</view>
 		<view class="jiaonang">
-			<view class="huati-yonghu">#话题</view>
-			<view class="huati-yonghu">@用户</view>
-			<image class="add" src="../../static/add.png"></image>
+			<view v-for="(e, i) in draftInfo.tags"
+			:key="i">
+			<view class="huati-yonghu">{{e}}</view>
+			<view style="position: absolute;">
+				<view class="tag-delete-confirm">333</view>
+			</view>
+			</view>
+			<input v-if="isAppendingTag" 
+			focus="true" class="huati-yonghu" 
+			type="text" maxlength="6" 
+			placeholder="#话题"
+			style="width:16vw;"
+			@blur="e=>{if(e.detail.value !== '')draftInfo.tags.push(e.detail.value);isAppendingTag=false;}" >
+			</input>
+			<image class="add" src="/static/add.png" @click="isAppendingTag=true"></image>
 		</view>
 		<view class="gongkai_or_simi">
 			<image class="simi" src="../../static/simi.png"></image>
 			<view class="simi-text">私密</view>
-			<switch class="switch" :checked="draftInfo.privateFlag" style="transform:scale(0.8);"></switch>
+			<switch class="switch" @change="e=>draftInfo.privateFlag=e.detail" :checked="draftInfo.privateFlag" style="transform:scale(0.8);"></switch>
 		</view>
 		<view class="bottom">
 			<image class="cuncaogao" src="../../static/cuncaogao.png" @click="saveDraft()">保存草稿</image>
-			<button class="fabu">发布</button>
+			<button class="fabu" @click="confirm()">发布</button>
 		</view>
 	</view>
 </template>
@@ -42,9 +54,11 @@
 		},
 		data(){
 			return{
+				gd : getApp().globalData,
 				draftId : undefined,
+				isAppendingTag : false,
 				draftInfo : {
-					title : "???",
+					title : "",
 					content : "",
 					tags : [],
 					privateFlag : false,
@@ -53,18 +67,16 @@
 		},
 		methods:{
 			async saveDraft(){
-				let creationFlag = false;
 				if(this.draftId === undefined){
+					let draftIndices = {top : 0, list : []};
 					try{
-						this.draftId = (await uni.getStorage({
-							key: "posts/drafts_top",
+						draftIndices = (await uni.getStorage({
+							key: "posts/draft_indices",
 						})).data;
-						creationFlag = true;
 					}catch{}
-				}
-				if(this.draftId === undefined){
-					creationFlag = true;
-					this.draftId = 0;
+					this.draftId = draftIndices.top;
+					++draftIndices.top;
+					draftIndices.list.push(this.draftId);
 				}
 				let info = {
 					title: this.draftInfo.title, 
@@ -76,18 +88,51 @@
 					key : "posts/drafts/" + this.draftId,
 					data: info,
 				});
-				if(creationFlag){
-					await uni.setStorage({
-						key: "posts/drafts_top",
-						data: this.draftId + 1,
-					});
-					console.log("新建草稿");
-				}
 				uni.showToast({
 					icon: "success",
 					title: "草稿已保存",
 				})
 			},
+			async confirm(){
+				uni.showLoading({
+					title:"发布中...",
+				});
+				try{
+					let res = await uni.request({
+						url : this.gd.serverURL + "/post/",
+						method : "POST",
+						data : {
+							user_info:{
+								user_id: this.gd.userInfo.user_id,
+								password: this.gd.userInfo.password,
+							},
+							title: this.draftInfo.title,
+							content: this.draftInfo.content,
+							tags: this.draftInfo.tags,
+							private_flag: this.draftInfo.privateFlag,
+						},
+					});
+					if(res.statusCode === 200){
+						uni.showToast({
+							icon: "success",
+							title: "发布成功",
+							duration: 1000,
+						});
+					}else{
+						uni.showToast({
+							icon: "error",
+							title: "请检查登录信息",
+							duration: 1000,
+						});
+					}
+				}catch{
+					uni.showToast({
+						icon:"error",
+						title:"与服务器连接失败",
+						duration : 1000,
+					});
+				}
+			}
 		}
 	}
 </script>
@@ -145,6 +190,7 @@
 	.jiaonang{
 		display: flex;
 		width: 90vw;
+		flex-wrap: wrap;
 	}
 	.huati-yonghu{
 		display: flex;
@@ -153,13 +199,19 @@
 		background-color: #ffffff;
 		font-size: 50rpx;
 		height: 5vh;
-		width:16vw;
+		width: fit-content;
 		font-family: "黑体";
 		color: rgb(52,120,246);
 		font-size: 3vh;
 		border-radius: 20rpx;
 		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
 		margin-left: 3vw;
+		overflow: visible;
+	}
+	.tag-delete-confirm{
+		position: inherit;
+		bottom: 6vh;
+		border: 1rpx;
 	}
 	.add{
 		border-radius: 50%;

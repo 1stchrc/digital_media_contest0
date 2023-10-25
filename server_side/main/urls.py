@@ -6,5 +6,6 @@ urlpatterns = [
     path('test/', lambda req: render(req, "test.html")),
     path('post_msg/', views.post_message),
     path('register/', views.register),
-    path('post/', views.post)
+    path('post/', views.post),
+    path('fetch_posts/', views.fetch_posts),
 ]

@@ -58,3 +58,14 @@ def post(req):
     post.private_flag = req_json["private_flag"]
     post.save()
     return HttpResponse(str(post.id))
+
+def fetch_posts(req):
+    cnt = int(req.GET.get("post_count"))
+    counter = 0
+    ret = []    
+    for e in models.post.objects.all():
+        if counter >= cnt:
+            break
+        counter += 1
+        ret.append({"title":e.title, "content":e.content, "tags":e.tags})
+    return HttpResponse(json.dumps(ret))
