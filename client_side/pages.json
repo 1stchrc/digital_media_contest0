@@ -103,6 +103,15 @@
 		        "enablePullDownRefresh": false
 		    }
 		    
+		},
+		{
+		    "path" : "pages/index/draft_box",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
 		}
     ],
 	"globalStyle": {
