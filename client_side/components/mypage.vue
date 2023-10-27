@@ -1,6 +1,11 @@
 <template>
 	<view class="mypage-all" style="background-color: rgb(244,244,244);">
-		<image class="setting" src="/static/setting.png"></image>
+		<view class="mypage-tanchuang" v-if="tanchuang==1">
+			<view class="tanchuang-each tanchuang-each-border">评价申诉</view>
+			<view class="tanchuang-each tanchuang-each-border">编辑标签</view>
+			<view class="tanchuang-each">编辑简历</view>
+		</view>
+		<image class="tanchuang" src="/static/setting.png" @click="clicktanchuang()"></image>
 		<view class="myhead">
 			<view class="head-name">
 				<image class="head-image" src="../static/logo.png"></image>
@@ -19,7 +24,6 @@
 		</view>
 		<view class="items2">
 			<view class="item2-text">关注</view>
-			<view class="item2-text">待办</view>
 			<view class="item2-text">评价</view>
 		</view>
 		
@@ -45,6 +49,18 @@
 </template>
 
 <script>
+	export default{
+		data(){
+			return{
+				tanchuang:0
+			}
+		},
+		methods:{
+			clicktanchuang(){
+				this.tanchuang=!this.tanchuang
+			}
+		}
+	}
 </script>
 
 <style>
@@ -53,12 +69,41 @@
 		flex-direction: column;
 		align-items: center;
 	}
-	.setting{
+	.tanchuang{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
 		position: fixed;
 		width: 60rpx;
 		height: 60rpx;
 		top: 3vh;
 		right: 3vw;
+	}
+	.mypage-tanchuang{
+		position: fixed;
+		right: 7vw;
+		top: 8vh;
+		width: 20vw;
+		height: 18vh;
+		background-color: white;
+		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.10);
+		border-radius: 20rpx;
+		border-style: solid;
+		border-width: 2rpx;
+		border-color: rgb(177,178,182);
+	}
+	.tanchuang-each{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 20vw;
+		height: 6vh;
+	}
+	.tanchuang-each-border{
+		border-bottom-style: solid;
+		border-width: 2rpx;
+		border-color: rgb(177,178,182);
 	}
 	.myhead{
 		display: flex;
