@@ -48,8 +48,11 @@
 		</view>
 		<view class="tabbox" v-if="tabbox1==1" @click="fabu()">
 			<view class="jiemian">
-				<view class="each-item" @click="clickfabu()">
-					发布
+				<view class="each-item" @click="clickfabutiezi()">
+					发布帖子
+				</view>
+				<view class="each-item" @click="clickfabuzudui()">
+					发布组队
 				</view>
 				<view class="each-item" @click="clickcaogao()">
 					草稿
@@ -81,7 +84,12 @@
 			fabu(){
 				this.tabbox1=!this.tabbox1
 			},
-			clickfabu(){
+			clickfabutiezi(){
+				uni.navigateTo({
+					url:"/pages/index/fatie"
+				})
+			},
+			clickfabuzudui(){
 				uni.navigateTo({
 					url:"/pages/index/fabu"
 				})
@@ -109,8 +117,8 @@
 	.jiemian{
 		position: fixed;
 		background-color: white;
-		width: 20vw;
-		height: 15vh;
+		width: 30vw;
+		height: 30vh;
 		bottom: 10vh;
 		border-radius: 20rpx;
 	}
@@ -119,8 +127,8 @@
 		justify-content: center;
 		align-items: center;
 		/* background-color: aqua; */
-		width: 20vw;
-		height: 7.5vh;
+		width: 30vw;
+		height: 10vh;
 		font-size: 40rpx;
 	}
 	.swiper{

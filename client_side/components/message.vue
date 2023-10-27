@@ -67,6 +67,7 @@
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
+		padding-bottom: 5vh;
 	}
 	.search-text{
 		font-size: 14px;
