@@ -3,19 +3,19 @@
 		<swiper class="swiper" @change="e=>selected_page = e.detail.current" :current="selected_page">
 			<swiper-item>
 				<main-page></main-page>
-				<view style="height: 10vh;" />
+				<view style="height: 9vh;" />
 			</swiper-item>
 			<swiper-item>
 				<message></message>
-				<view style="height: 10vh;" />
+				<view style="height: 9vh;" />
 			</swiper-item>
 			<swiper-item>
 				<zudui></zudui>
-				<view style="height: 10vh;" />
+				<view style="height: 9vh;" />
 			</swiper-item>
 			<swiper-item>
 				<mypage></mypage>
-				<view style="height: 10vh;" />
+				<view style="height: 9vh;" />
 			</swiper-item>
 		</swiper>
 		
@@ -46,6 +46,16 @@
 			<view class="tabbar_text_selected" v-else>我的</view>
 			</view>
 		</view>
+		<view class="tabbox" v-if="tabbox1==1" @click="fabu()">
+			<view class="jiemian">
+				<view class="each-item" @click="clickfabu()">
+					发布
+				</view>
+				<view class="each-item" @click="clickcaogao()">
+					草稿
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -58,6 +68,7 @@
 		data(){
 			return{
 				selected_page : 0,
+				tabbox1:0
 			};
 		},
 		components:{
@@ -68,15 +79,50 @@
 		},
 		methods:{
 			fabu(){
+				this.tabbox1=!this.tabbox1
+			},
+			clickfabu(){
 				uni.navigateTo({
-					url : "/pages/index/fabu",
-				});
+					url:"/pages/index/fabu"
+				})
+			},
+			clickcaogao(){
+				uni.navigateTo({
+					url:"/pages/index/draft_box"
+				})
 			}
 		}
 	}
 </script>
 
 <style>
+	.tabbox{
+		display: flex;
+		justify-content: center;
+		position: fixed;
+		background-color: rgba(149, 149, 149, 0.5);
+		width: 100vw;
+		height: 100vh;
+		top:0;
+		left:0;
+	}
+	.jiemian{
+		position: fixed;
+		background-color: white;
+		width: 20vw;
+		height: 15vh;
+		bottom: 10vh;
+		border-radius: 20rpx;
+	}
+	.each-item{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		/* background-color: aqua; */
+		width: 20vw;
+		height: 7.5vh;
+		font-size: 40rpx;
+	}
 	.swiper{
 		height: 90vh;
 	}

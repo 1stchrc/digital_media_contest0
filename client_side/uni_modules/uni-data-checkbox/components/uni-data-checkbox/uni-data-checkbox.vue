@@ -481,7 +481,6 @@
 			@include flex;
 			flex-direction: row;
 			flex-wrap: wrap;
-
 			&.is-list {
 				flex-direction: column;
 			}

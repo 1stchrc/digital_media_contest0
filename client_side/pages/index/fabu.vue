@@ -4,8 +4,22 @@
 		<view class="top">
 			发布组队
 		</view>
-		<view class="bisai-zhaomu">
-			* * * 比 赛 招 募
+		<input class="bisai-zhaomu" placeholder="**比赛（标题）"></input>
+		<view class="zhiwei-jineng-detail">
+			<uni-section title="多选" type="line">
+				<view class="zhiweibox">
+					<uni-data-checkbox class="zhiwei" multiple v-model="checkbox1" :localdata="hobby"></uni-data-checkbox>
+					<input class="inputzhiwei" placeholder="职位"/>
+				</view>
+			</uni-section>
+			<input class="jineng" placeholder="技能描述"></input>
+		</view>
+		<view class="add1">
+			<image class="add" src="../../static/add.png">添加多个职位（后端做好后删除改文字）</image>
+		</view>
+		<view class="bottom">
+			<image class="cuncaogao" src="../../static/cuncaogao.png" @click="saveDraft()">草稿</image>
+			<button class="fabu" @click="confirm()">发布</button>
 		</view>
 	</view>
 </template>
@@ -14,7 +28,10 @@
 	export default {
 		data() {
 			return {
-				
+				hobby: [{
+					text: '',
+					value: 0
+				}],
 			}
 		},
 		onLoad() {
@@ -52,7 +69,90 @@
 		border-bottom-style: ridge;
 	}
 	.bisai-zhaomu{
+		display: flex;
+		justify-content: center;
 		width: 86vw;
+		margin-top: 3vh;
+		font-size: 50rpx;
+		height:6vh;
+		border-bottom-style: ridge;
+	}
+	.jineng{
 		
+		color: #666;
+		font-size: 50rpx;
+		margin-left: 9vw;
+	}
+	.zhiweibox{
+		display: flex;
+		flex-wrap: nowrap;
+	}
+	.inputzhiwei{
+		position: fixed;
+		margin-left: 10vw;
+		font-size: 50rpx;
+	}
+	.zhiwei{
+		width: 30vw;
+		height: 5vh;
+		/* background-color: aliceblue */
+	}
+	.zhiwei-jinengmiaoshu{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+		/* background-color: aqua; */
+		width: 90vw;
+		height: 50vh;
+	}
+	.zhiwei-jineng-detail{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		/* background-color: antiquewhite; */
+		width: 88vw;
+		height: 20vh;
+		border-bottom-style: ridge;
+	}
+	.add{
+		margin-top: 2vh;
+		border-radius: 50%;
+		margin-left: 3vw;
+		width: 65rpx;
+		height: 65rpx;
+	}
+	.add1{
+		display: flex;
+		width: 90vw;
+		height: 10vh;
+		/* background-color: antiquewhite; */
+	}
+	.bottom{
+		display: flex;
+		align-items: center;
+		position: fixed;
+		bottom:2vh;
+		width: 90vw;
+		height: 8vh;
+		/* background-color: aliceblue; */
+	}
+	.cuncaogao{
+		margin-left: 2vh;
+		margin-right: 1vh;
+		width:60rpx;
+		height: 60rpx;	
+	}
+	.fabu{
+		margin-left: 15vw;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50vw;
+		height: 5vh;
+		border-radius: 50rpx;
+		background-color: rgb(52,120,245);
+		color:white;
+		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
 	}
 </style>

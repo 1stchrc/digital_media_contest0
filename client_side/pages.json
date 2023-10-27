@@ -60,15 +60,6 @@
 		    
 		},
 		{
-		    "path" : "pages/index/myguanzhu",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		},
-		{
 		    "path" : "pages/index/myteam",
 		    "style" :                                                                                    
 		    {
@@ -97,6 +88,24 @@
 		},
 		{
 		    "path" : "pages/index/zudui_tiezi",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/index/draft_box",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		{
+		    "path" : "pages/index/chat",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
