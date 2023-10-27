@@ -3,19 +3,19 @@
 		<swiper class="swiper" @change="e=>selected_page = e.detail.current" :current="selected_page">
 			<swiper-item>
 				<main-page></main-page>
-				<view style="height: 10vh;" />
+				<view style="height: 9vh;" />
 			</swiper-item>
 			<swiper-item>
 				<message></message>
-				<view style="height: 10vh;" />
+				<view style="height: 9vh;" />
 			</swiper-item>
 			<swiper-item>
 				<zudui></zudui>
-				<view style="height: 10vh;" />
+				<view style="height: 9vh;" />
 			</swiper-item>
 			<swiper-item>
 				<mypage></mypage>
-				<view style="height: 10vh;" />
+				<view style="height: 9vh;" />
 			</swiper-item>
 		</swiper>
 		
