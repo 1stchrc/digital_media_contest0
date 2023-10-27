@@ -4,7 +4,7 @@
 		<view class="yonghu-biaoti">
 			<view class="user">
 				<image class="touxiang" src="../../static/logo.png"></image>
-				<view class="userid">用户名</view>
+				<view class="userid">{{gd.userInfo.name}}</view>
 			</view>
 			<input class="biaoti" placeholder="标题" v-model="draftInfo.title"></input>
 		</view>
@@ -31,7 +31,7 @@
 		<view class="gongkai_or_simi">
 			<image class="simi" src="../../static/simi.png"></image>
 			<view class="simi-text">私密</view>
-			<switch class="switch" @change="e=>draftInfo.privateFlag=e.detail" :checked="draftInfo.privateFlag" style="transform:scale(0.8);"></switch>
+			<switch class="switch" @change="e=>draftInfo.privateFlag=Boolean(e.detail)" :checked="draftInfo.privateFlag" style="transform:scale(0.8);"></switch>
 		</view>
 		<view class="bottom">
 			<image class="cuncaogao" src="../../static/cuncaogao.png" @click="saveDraft()">草稿</image>

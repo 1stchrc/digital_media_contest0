@@ -27,7 +27,7 @@ class post_reply(models.Model):
 class post(models.Model):
     title = models.TextField(default="Nice post.")
     content = models.TextField(default="Some content...")
-    author_id = models.CharField(max_length=64)
+    author = models.ForeignKey(to=user_data, null=True, on_delete=models.SET_NULL)
     tags = models.JSONField(default=list)
     private_flag = models.BooleanField(default=False)
     replies = models.ManyToManyField(to = post_reply)

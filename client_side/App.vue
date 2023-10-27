@@ -118,7 +118,11 @@
 							case "BEGIN":{
 								console.log("登录成功");
 								res(true);
-								this.userInfo = userInfo;
+								this.userInfo = {
+									user_id : userInfo.user_id,
+									name : msg.data.name,
+									tags : msg.data.tags,
+								};
 								this.webSocketState = "CONNECTED";
 								await uni.onSocketMessage(msg=>{});
 								heartbeatSender();

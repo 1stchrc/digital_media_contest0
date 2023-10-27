@@ -13,7 +13,7 @@ def post_message(req):
     if not users.exists():
         return HttpResponseNotFound("User doesn't exist.")
     msg = models.message()
-    user = users[0]
+    user = users.first()
     msg.to = user
     msg.content  = req_json["content"]
     msg.save()
@@ -51,7 +51,7 @@ def post(req):
     if user == None:
         return HttpResponseNotFound("Authentication failed.")
     post = models.post()
-    post.author_id = user.id
+    post.author = user
     post.title = req_json["title"]
     post.content = req_json["content"]
     post.tags = req_json["tags"]
@@ -63,9 +63,27 @@ def fetch_posts(req):
     cnt = int(req.GET.get("post_count"))
     counter = 0
     ret = []    
-    for e in models.post.objects.all():
+    for e in models.post.objects.filter(private_flag = False):
         if counter >= cnt:
             break
         counter += 1
-        ret.append({"title":e.title, "content":e.content, "tags":e.tags})
+        ret.append({"post_id": e.id, "title":e.title, "content":e.content, "tags":e.tags, "author_name": e.author.name})
     return HttpResponse(json.dumps(ret))
+
+def get_post_detail(req):
+    post = models.post.objects.filter(id = req["post_id"])
+    if post.empty():
+        return HttpResponseNotFound("Post not found.")
+    post = post.first()
+    user = post.author
+    return HttpResponse(json.dumps({
+        "post_id": post.id, 
+        "title": post.title,
+        "content": post.content,
+        "tags": post.tags,
+        "author_info": {
+            "user_id": user.id,
+            "name": user.name,
+            "tags": user.tags,
+        },
+        }))

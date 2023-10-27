@@ -41,7 +41,11 @@ class UserConsumer(AsyncWebsocketConsumer):
                     self.user_id = user.id
                     connected_users[user.id] = self
                     asyncio.create_task(discard_async_loop())
-                    await self.send(json.dumps({"type" : "BEGIN", "data" : {}}))
+                    await self.send(json.dumps({"type" : "BEGIN", "data" : {
+                        "user_id": user.id,
+                        "name": user.name,
+                        "tags": json.dumps(user.tags),
+                    }}))
                     print(f"User connected: {user.id}")
                 except:
                     await self.close()
