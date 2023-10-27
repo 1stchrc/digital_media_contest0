@@ -68,6 +68,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		padding-bottom: 15vh;
 	}
 	.tanchuang{
 		display: flex;

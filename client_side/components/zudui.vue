@@ -25,11 +25,11 @@
 		<view class="detail">
 			<view class="detail_left">
 				<view class="detailitem" v-for="(item,index) in array">
-					<view class="user">
+					<view class="user" @click="clickuser()">
 						<image class="touxiang" src="/static/logo.png"></image>
 						<view class="userid">用户名</view>
 					</view>
-					<view class="item_message">项目信息</view>
+					<view class="item_message" @click="clickxiangmu()">项目信息</view>
 					<view class="last">
 						<image class="shoucang" @click="clickshoucang_left(index)" v-if="shoucang_left[index]==0" src="/static/shoucang.png"></image>
 						<image class="shoucang" v-else src="/static/shoucang_selected.png" @click="clickshoucang_left(index)"></image>
@@ -46,7 +46,7 @@
 						<image class="touxiang" src="/static/logo.png"></image>
 						<view class="userid">用户名</view>
 					</view>
-					<view class="item_message">项目信息</view>
+					<view class="item_message" @click="clickxiangmu()">项目信息</view>
 					<view class="last">
 						<image class="shoucang" @click="clickshoucang_right(index)" v-if="shoucang_right[index]==0" src="/static/shoucang.png"></image>
 						<image class="shoucang" v-else src="/static/shoucang_selected.png" @click="clickshoucang_right(index)"></image>
@@ -141,6 +141,16 @@
 			},
 			clickguan(){
 				this.guan_clicked=!this.guan_clicked
+			},
+			clickxiangmu(){
+				uni.navigateTo({
+					url:"/pages/index/zudui_tiezi"
+				})
+			},
+			clickuser(){
+				uni.navigateTo({
+					url:"/pages/index/mypage"
+				})
 			}
 		}
 	}
