@@ -14,11 +14,11 @@
 			<view class="head-details">
 				<view class="user-detail-item" style="border-right-style: solid;border-width: 2rpx;border-color: rgb(177,178,182);">
 					<view class="user-detail-item-number">12</view>
-					<view class="user-detail-item-text">影响力</view>
+					<view class="user-detail-item-text">简历</view>
 				</view>
 				<view class="user-detail-item">
 					<view class="user-detail-item-number">12</view>
-					<view class="user-detail-item-text">访客数</view>
+					<view class="user-detail-item-text">收藏</view>
 				</view>
 			</view>
 		</view>

@@ -1,8 +1,10 @@
 <template>
 	<view class="all">
 		<view class="sort_bar">
-			<view class="sort_item">答疑</view>
-			<view class="sort_item">经验分享</view>
+			<view v-if="selected==0" class="sort_item" style="border-bottom-style: ridge;border-color: rgb(52,120,245);">答疑</view>
+			<view v-else class="sort_item" @click="clickdayi()">答疑</view>
+			<view v-if="selected==1" class="sort_item" style="border-bottom-style: ridge;border-color: rgb(52,120,245);">经验分享</view>
+			<view v-else class="sort_item" @click="clickjingyanfenxiang()">经验分享</view>
 		</view>
 		<swiper class="swiper" indicator-dots='ture' autoplay="ture" interval=3000 circular="ture">
 			<swiper-item><image class="swiper_image" src='/static/logo.png'></image></swiper-item>
@@ -43,6 +45,7 @@
 				gd: getApp().globalData,
 				leftContents: [],
 				rightContents: [],
+				selected:0
 			}
 		},
 		methods:{
@@ -69,6 +72,12 @@
 				uni.navigateTo({
 					url:"/pages/index/tiezi_detail"
 				})
+			},
+			clickdayi(){
+				this.selected=0
+			},
+			clickjingyanfenxiang(){
+				this.selected=1
 			}
 		}
 	}
@@ -79,9 +88,12 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-around;
-		background-color: antiquewhite;
 		width: 100vw;
-		height: 5vh;
+		height: 7vh;
+		/* border-bottom-style: solid; */
+		box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+		margin-bottom: 1vh;
+		
 	}
 	.sort_item{
 		

@@ -9,7 +9,7 @@
 			</view>
 		<view v-if="select==0" class="all">
 			<view class="item" v-for="(item,index) in array">
-				{{item}}
+				通知详情
 			</view>
 		</view>
 		<view v-if="select==2" class="all">
@@ -26,7 +26,7 @@
 				<view class="each-user" v-for="(item,index) in array">
 					<image class="user-picture" src="/static/logo.png"></image>
 					<view class="name-read">
-						<view>{{item}}</view>
+						<view>用户id</view>
 						<view class="user-read">{{num[index]}}条内容更新</view>
 					</view>
 				</view>
@@ -155,7 +155,7 @@
 	.message_sort{
 		display: flex;
 		align-items: center;
-		background-color: aliceblue;
+		/* background-color: aliceblue; */
 		width: 100vw;
 		height:8vh;
 		justify-content: space-around;
@@ -164,17 +164,6 @@
 	}
 	.sort_text{
 		
-	}
-	.message_detail{
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-around;
-		width: 80vw;
-		margin-top: 3vh;
-		margin-left: 10vw;
-		background-color: bisque;
-		height:70vh;
 	}
 	.message_item{
 		width: 78vw;
