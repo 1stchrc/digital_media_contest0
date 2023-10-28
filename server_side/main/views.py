@@ -61,12 +61,8 @@ def post(req):
 
 def fetch_posts(req):
     cnt = int(req.GET.get("post_count"))
-    counter = 0
-    ret = []    
-    for e in models.post.objects.filter(private_flag = False):
-        if counter >= cnt:
-            break
-        counter += 1
+    ret = []
+    for e in models.post.objects.filter(private_flag = False)[:cnt]:
         ret.append({"post_id": e.id, "title":e.title, "content":e.content, "tags":e.tags, "author_name": e.author.name})
     return HttpResponse(json.dumps(ret))
 
