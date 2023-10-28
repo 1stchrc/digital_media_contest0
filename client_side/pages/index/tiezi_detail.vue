@@ -2,16 +2,16 @@
 	<view class="all">
 		<view class="user">
 			<image class="touxiang" src="../../static/logo.png"></image>
-			<view class="userid">用户名</view>
+			<view class="userid">{{postInfo.author_info.name}}</view>
 			<view class="user_guanzhu" v-if="guanzhu==0" @click="guanzhu1()">关注</view>
 			<view class="user_guanzhu" v-else @click="guanzhu1()">已关注</view>
 		</view>
 		<view class="zhengwen">
 			<view class="title">
-				这里是题目
+				{{postInfo.title}}
 			</view>
 			<view class="detail">
-				这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文这里是正文
+				{{postInfo.content}}
 			</view>
 			<image class="image" src="../../static/add.png"></image>
 		</view>
@@ -29,10 +29,21 @@
 	export default{
 		data(){
 			return{
+				gd:getApp().globalData,
+				postId: this.$route.query.id,
+				postInfo: {title:"", content:"", author_info:{name:""}},
 				guanzhu:false,
 				dianzan:false,
 				shoucang:false
 			}
+		},
+		async onLoad(){
+			this.postInfo = (await uni.request({
+				url: this.gd.serverURL + "/post_detail/?post_id="+ this.postId,
+				method: "GET",
+			})).data;
+			console.log()
+			this.$forceUpdate();
 		},
 		methods:{
 			guanzhu1(){

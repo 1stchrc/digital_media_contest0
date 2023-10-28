@@ -2,29 +2,22 @@
 	<view class="all">
 		<view class="user">
 			<image class="touxiang" src="../../static/logo.png"></image>
-			<view class="userid">用户名</view>
+			<view class="userid">{{teamInfo.leader_info.name}}</view>
 			<view class="user_guanzhu" v-if="guanzhu==0" @click="guanzhu1()">关注</view>
 			<view class="user_guanzhu" v-else @click="guanzhu1()">已关注</view>
 		</view>
 		<view class="bisai-zhaomu">
-			* * * 比 赛 招 募
+			{{teamInfo.title}}
 		</view>
 		<view class="zhiwei-jinengmiaoshu">
-			<view class="zhiwei-jineng-detail">
-				<uni-section title="多选" type="line">
+			<view v-for="(e, i) in teamInfo.positions" :key="i" class="zhiwei-jineng-detail">
+				<!-- <uni-section title="多选" type="line">
 					<view class="uni-px-5 uni-pb-5">
 						<uni-data-checkbox class="zhiwei" multiple v-model="checkbox1" :localdata="hobby"></uni-data-checkbox>
 					</view>
-				</uni-section>
-				<view class="jineng">技能描述</view>
-			</view>
-			<view class="zhiwei-jineng-detail">
-				<uni-section title="多选" type="line">
-					<view class="uni-px-5 uni-pb-5">
-						<uni-data-checkbox class="zhiwei" multiple v-model="checkbox1" :localdata="hobby"></uni-data-checkbox>
-					</view>
-				</uni-section>
-				<view class="jineng">技能描述</view>
+				</uni-section> -->
+				<view class="jineng">{{e.name}}</view>
+				<view class="jineng">{{e.desc}}</view>
 			</view>
 		</view>
 		<view class="bottom">
@@ -41,14 +34,19 @@
 	export default{
 		data(){
 			return{
+				gd: getApp().globalData,
+				teamId: this.$route.query.id,
+				teamInfo: {title:"", positions:"", leader_info:{name:""}},
 				guanzhu:false,
 				dianzan:false,
 				shoucang:false,
-				hobby: [{
-					text: '职位',
-					value: 0
-				}],
 			}
+		},
+		async onLoad(){
+			this.teamInfo = (await uni.request({
+				url:this.gd.serverURL + "/team_detail/?team_id="+this.teamId,
+			})).data;
+			this.$forceUpdate();
 		},
 		methods:{
 			guanzhu1(){

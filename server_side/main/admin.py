@@ -5,3 +5,4 @@ from . import models
 admin.site.register(models.user_data)
 admin.site.register(models.message)
 admin.site.register(models.post)
+admin.site.register(models.team)

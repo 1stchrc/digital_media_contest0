@@ -1,59 +1,43 @@
 <template>
 	<view class="all">
 		<view class="saishi_fenlei">
-			<view class="fenlei" v-if="li_clicked==0" @click="clickli">理</view>
-			<view class="fenlei2" v-else @click="clickli">理</view>
-			<view class="fenlei" v-if="gong_clicked==0" @click="clickgong">工</view>
-			<view class="fenlei2" v-else @click="clickgong">工</view>
-			<view class="fenlei" v-if="nong_clicked==0" @click="clicknong">农</view>
-			<view class="fenlei2" v-else @click="clicknong">农</view>
-			<view class="fenlei" v-if="yi_clicked==0" @click="clickyi">医</view>
-			<view class="fenlei2" v-else @click="clickyi">医</view>
-			<view class="fenlei" v-if="wen_clicked==0" @click="clickwen">文</view>
-			<view class="fenlei2" v-else @click="clickwen">文</view>
-			<view class="fenlei" v-if="shi_clicked==0" @click="clickshi">史</view>
-			<view class="fenlei2" v-else @click="clickshi">史</view>
-			<view class="fenlei" v-if="zhe_clicked==0" @click="clickzhe">哲</view>
-			<view class="fenlei2" v-else @click="clickzhe">哲</view>
-			<view class="fenlei" v-if="zheng_clicked==0" @click="clickzheng">政</view>
-			<view class="fenlei2" v-else @click="clickzheng">政</view>
-			<view class="fenlei" v-if="jing_clicked==0" @click="clickjing">经</view>
-			<view class="fenlei2" v-else @click="clickjing">经</view>
-			<view class="fenlei" v-if="guan_clicked==0" @click="clickguan">管</view>
-			<view class="fenlei2" v-else @click="clickguan">管</view>
+			<view v-for="(e, i) in queryTags" :key="i">
+				<view class="fenlei" v-if="!e.checked" @click="e.checked=true">{{e.text}}</view>
+				<view class="fenlei2" v-else @click="e.checked=false">{{e.text}}</view>
+			</view>
 		</view>
 		<view class="detail">
 			<view class="detail_left">
-				<view class="detailitem" v-for="(item,index) in array">
+				<view class="detailitem" v-for="(e,i) in leftContents" :key="i">
 					<view class="user" @click="clickuser()">
 						<image class="touxiang" src="/static/logo.png"></image>
-						<view class="userid">用户名</view>
+						<view class="userid">{{e.leaderName}}</view>
 					</view>
-					<view class="item_message" @click="clickxiangmu()">项目信息</view>
+					<view class="item_message" @click="clickxiangmu(e.teamId)">{{e.title}}</view>
 					<view class="last">
-						<image class="shoucang" @click="clickshoucang_left(index)" v-if="shoucang_left[index]==0" src="/static/shoucang.png"></image>
-						<image class="shoucang" v-else src="/static/shoucang_selected.png" @click="clickshoucang_left(index)"></image>
-						<image class="jiejianli" @click="clickxihuan_left(index)" v-if="xihuan_left[index]==0" src="/static/xihuan.png"></image>
-						<image class="jiejianli" v-else src="/static/xihuan_selected.png" @click="clickxihuan_left(index)"></image>
-						<image class="jiejianli" @click="clicktoujianli_left(index)" v-if="toujianli_left[index]==0" src="/static/toujianli.png"></image>
-						<image class="jiejianli" v-else src="/static/toujianli.png" @click="clicktoujianli_left(index)"></image>
+						<image class="shoucang" @click="e.faved=true" v-if="!e.faved" src="/static/shoucang.png"></image>
+						<image class="shoucang" v-else src="/static/shoucang_selected.png" @click="e.faved=false"></image>
+						<image class="jiejianli" @click="e.liked=true" v-if="!e.liked" src="/static/xihuan.png"></image>
+						<image class="jiejianli" v-else src="/static/xihuan_selected.png" @click="e.liked=false"></image>
+						<image class="jiejianli" @click=";" v-if="true" src="/static/toujianli.png"></image>
+						<image class="jiejianli" v-else src="/static/toujianli.png" @click=";"></image>
 					</view>
 				</view>
 			</view>
 			<view class="detail_right">
-				<view class="detailitem" v-for="(item,index) in array">
-					<view class="user">
+				<view class="detailitem" v-for="(e,i) in rightContents" :key="i">
+					<view class="user" @click="clickuser()">
 						<image class="touxiang" src="/static/logo.png"></image>
-						<view class="userid">用户名</view>
+						<view class="userid">{{e.leaderName}}</view>
 					</view>
-					<view class="item_message" @click="clickxiangmu()">项目信息</view>
+					<view class="item_message" @click="clickxiangmu(e.teamId)">{{e.title}}</view>
 					<view class="last">
-						<image class="shoucang" @click="clickshoucang_right(index)" v-if="shoucang_right[index]==0" src="/static/shoucang.png"></image>
-						<image class="shoucang" v-else src="/static/shoucang_selected.png" @click="clickshoucang_right(index)"></image>
-						<image class="jiejianli" @click="clickxihuan_right(index)" v-if="xihuan_right[index]==0" src="/static/xihuan.png"></image>
-						<image class="jiejianli" v-else src="/static/xihuan_selected.png" @click="clickxihuan_right(index)"></image>
-						<image class="jiejianli" @click="clicktoujianli_right(index)" v-if="toujianli_right[index]==0" src="/static/toujianli.png"></image>
-						<image class="jiejianli" v-else src="/static/toujianli.png" @click="clicktoujianli_right(index)"></image>
+						<image class="shoucang" @click="e.faved=true" v-if="!e.faved" src="/static/shoucang.png"></image>
+						<image class="shoucang" v-else src="/static/shoucang_selected.png" @click="e.faved=false"></image>
+						<image class="jiejianli" @click="e.liked=true" v-if="!e.liked" src="/static/xihuan.png"></image>
+						<image class="jiejianli" v-else src="/static/xihuan_selected.png" @click="e.liked=false"></image>
+						<image class="jiejianli" @click=";" v-if="true" src="/static/toujianli.png"></image>
+						<image class="jiejianli" v-else src="/static/toujianli.png" @click=";"></image>
 					</view>
 				</view>
 			</view>
@@ -65,86 +49,36 @@
 	export default {
 		data() {
 			return {
-				array:["吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码","吃饭","睡觉","打代码"],
-				shoucang_left:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-				toujianli_left:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-				xihuan_left:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-				shoucang_right:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-				toujianli_right:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-				xihuan_right:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-				li_clicked:0,
-				gong_clicked:0,
-				nong_clicked:0,
-				yi_clicked:0,
-				wen_clicked:0,
-				shi_clicked:0,
-				zhe_clicked:0,
-				zheng_clicked:0,
-				jing_clicked:0,
-				guan_clicked:0
+				gd: getApp().globalData,
+				queryTags: [
+					'理', '工', '农', '医', '文', '史', '哲', '政', '经', '管'
+					].map(e=>{return {text: e, checked: false}}),
+				leftContents: [],
+				rightContents: [],
 			}
 		},
-		onLoad() {
-	
+		async mounted() {
+			let res = (await uni.request({
+				url: this.gd.serverURL + "/fetch_teams/?team_count=20",
+				method: "GET",
+			})).data;
+			console.log(res);
+			for(let i = 0; i < res.length; ++i){
+				let el = {
+					teamId: res[i].team_id,
+					title: res[i].title,
+					leaderName: res[i].leader_name,
+					faved: false,
+					liked: false,
+				};
+				if(i % 2 === 0)this.leftContents.push(el);
+				else this.rightContents.push(el);
+			}
 		},
 		methods: {
-			clickshoucang_left(x){
-				this.shoucang_left[x]=!this.shoucang_left[x];
-				this.$forceUpdate();
-			},
-			clicktoujianli_left(x){
-				this.toujianli_left[x]=!this.toujianli_left[x];
-				this.$forceUpdate();
-			},
-			clickxihuan_left(x){
-				this.xihuan_left[x]=!this.xihuan_left[x];
-				this.$forceUpdate();
-			},
-			clickshoucang_right(x){
-				this.shoucang_right[x]=!this.shoucang_right[x];
-				this.$forceUpdate();
-			},
-			clicktoujianli_right(x){
-				this.toujianli_right[x]=!this.toujianli_right[x];
-				this.$forceUpdate();
-			},
-			clickxihuan_right(x){
-				this.xihuan_right[x]=!this.xihuan_right[x];
-				this.$forceUpdate();
-			},
-			clickli(){
-				this.li_clicked=!this.li_clicked
-			},
-			clickgong(){
-				this.gong_clicked=!this.gong_clicked
-			},
-			clicknong(){
-				this.nong_clicked=!this.nong_clicked
-			},
-			clickyi(){
-				this.yi_clicked=!this.yi_clicked
-			},
-			clickwen(){
-				this.wen_clicked=!this.wen_clicked
-			},
-			clickshi(){
-				this.shi_clicked=!this.shi_clicked
-			},
-			clickzhe(){
-				this.zhe_clicked=!this.zhe_clicked
-			},
-			clickzheng(){
-				this.zheng_clicked=!this.zheng_clicked
-			},
-			clickjing(){
-				this.jing_clicked=!this.jing_clicked
-			},
-			clickguan(){
-				this.guan_clicked=!this.guan_clicked
-			},
-			clickxiangmu(){
+			clickxiangmu(id){
 				uni.navigateTo({
-					url:"/pages/index/zudui_tiezi"
+					url:"/pages/index/zudui_tiezi?id=" + id,
 				})
 			},
 			clickuser(){

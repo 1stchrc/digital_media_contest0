@@ -4,18 +4,18 @@
 		<view class="top">
 			发布组队
 		</view>
-		<input class="bisai-zhaomu" placeholder="**比赛（标题）"></input>
-		<view class="zhiwei-jineng-detail">
+		<input class="bisai-zhaomu" v-model="title" placeholder="**比赛（标题）"></input>
+		<view v-for="(e, i) in positions" :key="i" class="zhiwei-jineng-detail">
 			<uni-section title="多选" type="line">
 				<view class="zhiweibox">
-					<uni-data-checkbox class="zhiwei" multiple v-model="checkbox1" :localdata="hobby"></uni-data-checkbox>
-					<input class="inputzhiwei" placeholder="职位"/>
+					<!-- <uni-data-checkbox class="zhiwei" multiple v-model="checkbox1" :localdata="hobby"></uni-data-checkbox> -->
+					<input class="inputzhiwei" v-model="e.name" placeholder="职位"/>
 				</view>
 			</uni-section>
-			<input class="jineng" placeholder="技能描述"></input>
+			<input class="jineng" v-model="e.desc" placeholder="技能描述"></input>
 		</view>
-		<view class="add1">
-			<image class="add" src="../../static/add.png">添加多个职位（后端做好后删除改文字）</image>
+		<view class="add1" @click="positions.push({name:'', desc:''});">
+			<image class="add" src="../../static/add.png"></image>
 		</view>
 		<view class="bottom">
 			<image class="cuncaogao" src="../../static/cuncaogao.png" @click="saveDraft()">草稿</image>
@@ -28,9 +28,11 @@
 	export default {
 		data() {
 			return {
-				hobby: [{
-					text: '',
-					value: 0
+				gd : getApp().globalData,
+				title: "",
+				positions:[{
+					name:"",
+					desc:""
 				}],
 			}
 		},
@@ -42,6 +44,18 @@
 				uni.navigateTo({
 					url:"/pages/index/main"
 				})
+			},
+			async confirm(){
+				await uni.request({
+					url: this.gd.serverURL + "/create_team/",
+					method: "POST",
+					data:{
+						user_info : this.gd.userInfo,
+						title: this.title,
+						positions: this.positions,
+					}
+				});
+				
 			}
 		}
 	}

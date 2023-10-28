@@ -39,11 +39,18 @@ def create_team(req):
         return HttpResponseNotFound("Authentication failed.")
     team = models.team()
     team.title = req_json["title"]
-    team.intro = req_json["intro"]
+    team.positions = req_json["positions"]
     team.leader_id = user.id
-    team.members.add(user)
     team.save()
+    team.members.add(user)
     return HttpResponse(str(team.id))
+
+def fetch_teams(req):
+    cnt = int(req.GET.get("team_count"))
+    ret = []
+    for e in models.team.objects.all()[:cnt]:
+        ret.append({"team_id": e.id, "title":e.title, "postions":e.positions, "leader_name": models.user_data.objects.get(id = e.leader_id).name})
+    return HttpResponse(json.dumps(ret))
 
 def post(req):
     req_json = json.loads(req.body)
@@ -67,8 +74,8 @@ def fetch_posts(req):
     return HttpResponse(json.dumps(ret))
 
 def get_post_detail(req):
-    post = models.post.objects.filter(id = req["post_id"])
-    if post.empty():
+    post = models.post.objects.filter(id = req.GET.get("post_id"))
+    if not post.exists():
         return HttpResponseNotFound("Post not found.")
     post = post.first()
     user = post.author
@@ -78,6 +85,23 @@ def get_post_detail(req):
         "content": post.content,
         "tags": post.tags,
         "author_info": {
+            "user_id": user.id,
+            "name": user.name,
+            "tags": user.tags,
+        },
+        }))
+
+def get_team_detail(req):
+    team = models.team.objects.filter(id = req.GET.get("team_id"))
+    if not team.exists():
+        return HttpResponseNotFound("Post not found.")
+    team = team.first()
+    user = models.user_data.objects.get(id = team.leader_id)
+    return HttpResponse(json.dumps({
+        "team_id": team.id, 
+        "title": team.title,
+        "positions": team.positions,
+        "leader_info": {
             "user_id": user.id,
             "name": user.name,
             "tags": user.tags,

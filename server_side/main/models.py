@@ -14,11 +14,11 @@ class message(models.Model):
 
 class team(models.Model):
     leader_id = models.CharField(max_length=64)
-    members = models.ManyToManyField(to = user_data)
+    members = models.ManyToManyField(user_data)
     title = models.TextField(default="WTF Contest")
     #category = models.TextField(default="Maths")
     #tags = models.JSONField(default=list)
-    intro = models.TextField(default="Some nice team.")
+    positions = models.JSONField(default=dict)
 
 class post_reply(models.Model):
     content = models.TextField(default="Nice reply.")

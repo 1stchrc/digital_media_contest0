@@ -22,13 +22,13 @@
 			<view class="detail_left">
 				<view v-for="(e, i) in leftContents"
 				:key="i"
-				class="detail_left_item" @click="open_detail"
+				class="detail_left_item" @click="open_detail(e.post_id)"
 				>{{e.title}}</view>
 			</view>
 			<view class="detail_right">
 				<view v-for="(e, i) in rightContents"
 				:key="i"
-				class="detail_right_item" @click="open_detail"
+				class="detail_right_item" @click="open_detail(e.post_id)"
 				>{{e.title}}</view>
 			</view>
 		</view>
@@ -68,9 +68,9 @@
 					}
 				}catch{}
 			},
-			open_detail(){
+			open_detail(id){
 				uni.navigateTo({
-					url:"/pages/index/tiezi_detail"
+					url:"/pages/index/tiezi_detail?id="+id,
 				})
 			},
 			clickdayi(){
