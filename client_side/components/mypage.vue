@@ -23,7 +23,7 @@
 			</view>
 		</view>
 		<view class="items2">
-			<view class="item2-text">关注</view>
+			<view class="item2-text" @click="clickguanzhu()">关注</view>
 			<view class="item2-text">评价</view>
 		</view>
 		
@@ -58,6 +58,11 @@
 		methods:{
 			clicktanchuang(){
 				this.tanchuang=!this.tanchuang
+			},
+			clickguanzhu(){
+				uni.navigateTo({
+					url:"/pages/index/myguanzhu"
+				})
 			}
 		}
 	}
@@ -209,8 +214,11 @@
 		width: 35vw;
 	}
 	.tag_detail{
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		font-size: 40rpx;
-		margin: 10rpx;
+		width: 17vw;
 	}
 	.pingjia-image{
 		width: 150rpx;
