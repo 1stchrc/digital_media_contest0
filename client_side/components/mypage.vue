@@ -16,15 +16,15 @@
 					<view class="user-detail-item-number">12</view>
 					<view class="user-detail-item-text">简历</view>
 				</view>
-				<view class="user-detail-item">
+				<view class="user-detail-item" style="border-right-style: solid;border-width: 2rpx;border-color: rgb(177,178,182);">
 					<view class="user-detail-item-number">12</view>
 					<view class="user-detail-item-text">收藏</view>
 				</view>
+				<view class="user-detail-item">
+					<view class="user-detail-item-number">12</view>
+					<view class="user-detail-item-text">评价</view>
+				</view>
 			</view>
-		</view>
-		<view class="items2">
-			<view class="item2-text" @click="clickguanzhu()">关注</view>
-			<view class="item2-text">评价</view>
 		</view>
 		
 		<view class="items3">
@@ -36,12 +36,12 @@
 					<view class="tag_detail">奖项多</view>
 				</view>
 			</view>
-			<view class="items3-each">
+			<view class="items3-each2">
 				<view class="pingjia">
-					<image class="pingjia-image" src="../static/add.png"></image>
-					<view class="pingfen">
+					<image class="pingjia-image" src="../static/jishupingfen.png"></image>
+					<!-- <view class="pingfen">
 						评分
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
@@ -160,7 +160,7 @@
 		height: 150rpx;
 	}
 	.user-detail-item-number{
-		font-size: 60rpx;
+		font-size: 50rpx;
 	}
 	.user-detail-item-text{
 		font-size: 30rpx;
@@ -193,7 +193,15 @@
 		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.10);
 	}
 	.items3-each{
-		width: 45vw;
+		width: 23vw;
+		margin-left: 3vw;
+		margin-right: 0vw;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.items3-each2{
+		width: auto;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -207,7 +215,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		justify-content: space-around;
+		justify-content: center;
 		/* background-color: aqua; */
 		/* border-style: solid; */
 		height: 25vh;
@@ -217,12 +225,17 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 40rpx;
-		width: 17vw;
+		background-color: #ffffff;
+		height: 5vh;
+		color: rgb(52,120,246);
+		border-radius: 2.5vh;
+		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
+		font-size: 35rpx;
+		width: 20vw;
 	}
 	.pingjia-image{
-		width: 150rpx;
-		height: 150rpx;
+		width: 440rpx;
+		height: 330rpx;
 		
 	}
 	.pingjia{
@@ -232,10 +245,10 @@
 		justify-content: center;
 		/* border-style: solid; */
 		/* background-color: aqua; */
-		height: 25vh;
-		width: 35vw;
+		height: 30vh;
+		width: 70vw;
 	}
 	.pingfen{
-		margin: 3vw;
+		margin: 2vw;
 	}
 </style>
