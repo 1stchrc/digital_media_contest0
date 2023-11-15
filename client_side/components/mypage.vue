@@ -16,15 +16,15 @@
 					<view class="user-detail-item-number">12</view>
 					<view class="user-detail-item-text">简历</view>
 				</view>
-				<view class="user-detail-item">
+				<view class="user-detail-item" style="border-right-style: solid;border-width: 2rpx;border-color: rgb(177,178,182);">
 					<view class="user-detail-item-number">12</view>
 					<view class="user-detail-item-text">收藏</view>
 				</view>
+				<view class="user-detail-item">
+					<view class="user-detail-item-number">12</view>
+					<view class="user-detail-item-text">评价</view>
+				</view>
 			</view>
-		</view>
-		<view class="items2">
-			<view class="item2-text" @click="clickguanzhu()">关注</view>
-			<view class="item2-text">评价</view>
 		</view>
 		
 		<view class="items3">
@@ -160,7 +160,7 @@
 		height: 150rpx;
 	}
 	.user-detail-item-number{
-		font-size: 60rpx;
+		font-size: 50rpx;
 	}
 	.user-detail-item-text{
 		font-size: 30rpx;
@@ -217,6 +217,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		background-color: #ffffff;
+		height: 5vh;
+		color: rgb(52,120,246);
+		border-radius: 2.5vh;
+		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
 		font-size: 40rpx;
 		width: 17vw;
 	}

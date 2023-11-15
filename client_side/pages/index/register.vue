@@ -1,10 +1,12 @@
 <template>
-	<view>
-		<input type="text" v-model="mail" placeholder="邮箱" maxlength="64"></input>
-		<input type="text" v-model="username" placeholder="用户名" maxlength="64"></input>
-		<input type="safe-password" password="true" v-model="password" placeholder="密码" maxlength="64"></input>
-		<input type="safe-password" password="true" v-model="passwordAgain" placeholder="确认密码" maxlength="64"></input>
-		<button @click="confirm()">AAS</button>
+	<view class="all">
+		<view class="register-text">注册账号</view>
+		<input class="input" type="text" v-model="mail" placeholder="请输入邮箱" maxlength="64"></input>
+		<input class="input" type="text" v-model="username" placeholder="请输入用户名" maxlength="64"></input>
+		<input class="input" type="safe-password" password="true" v-model="password" placeholder="密码" maxlength="64"></input>
+		<input class="input" type="safe-password" password="true" v-model="passwordAgain" placeholder="确认密码" maxlength="64"></input>
+		<button class="button" @click="confirm()">立即注册</button>
+		<view class="login" @click="login()">已有账号，点此去登陆</view>
 	</view>
 </template>
 
@@ -97,10 +99,45 @@
 					});
 				}
 			},
+			login(){
+				uni.navigateTo({
+					url:"./login"
+				})
+			}
 		}
 	}
 </script>
 
 <style>
-
+	.all{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+	}
+	.register-text{
+		margin-top: 11vh;
+		width: 76vw;
+		font-size: 55rpx;
+		font-weight: 500;
+	}
+	.input{
+		width: 76vw;
+		margin-top: 3vh;
+		height: 7vh;
+		border-radius: 50rpx;
+		padding-left: 5vw;
+		background-color: rgb(229,244,251);
+	}
+	.button{
+		margin-top: 10vw;
+		width: 76vw;
+		background-color: rgb(158,172,245);
+		color: white;
+	}
+	.login{
+		display: flex;
+		margin-top: 3vh;
+		color:rgb(176,176,176);
+	}
 </style>
