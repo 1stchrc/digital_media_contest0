@@ -24,7 +24,7 @@
 		methods: {
 			click_confirm(){
 				uni.navigateTo({
-					url:"/pages/index/main",
+					url:"/pages/index/login",
 				})
 			},
 		}

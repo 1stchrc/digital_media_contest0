@@ -35,14 +35,15 @@
 		data(){
 			return{
 				gd: getApp().globalData,
-				teamId: this.$route.query.id,
+				teamId: null,
 				teamInfo: {title:"", positions:"", leader_info:{name:""}},
 				guanzhu:false,
 				dianzan:false,
 				shoucang:false,
 			}
 		},
-		async onLoad(){
+		async onLoad(options){
+			this.teamId = options.id;
 			this.teamInfo = (await uni.request({
 				url:this.gd.serverURL + "/team_detail/?team_id="+this.teamId,
 			})).data;

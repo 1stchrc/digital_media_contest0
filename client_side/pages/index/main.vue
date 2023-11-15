@@ -80,6 +80,9 @@
 			"zudui":zudui,
 			"mypage":mypage,
 		},
+		onShow(){
+			this.$forceUpdate();
+		},
 		methods:{
 			fabu(){
 				this.tabbox1=!this.tabbox1

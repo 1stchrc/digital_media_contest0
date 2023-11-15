@@ -30,14 +30,15 @@
 		data(){
 			return{
 				gd:getApp().globalData,
-				postId: this.$route.query.id,
+				postId: null,
 				postInfo: {title:"", content:"", author_info:{name:""}},
 				guanzhu:false,
 				dianzan:false,
 				shoucang:false
 			}
 		},
-		async onLoad(){
+		async onLoad(options){
+			this.postId = options.id;
 			this.postInfo = (await uni.request({
 				url: this.gd.serverURL + "/post_detail/?post_id="+ this.postId,
 				method: "GET",

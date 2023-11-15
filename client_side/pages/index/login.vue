@@ -48,7 +48,9 @@
 						title:"登录成功",
 						duration:1000,
 					});
-					
+					uni.navigateTo({
+						url:"/pages/index/main",
+					})
 				} catch {
 					uni.showToast({
 						icon: "error",
