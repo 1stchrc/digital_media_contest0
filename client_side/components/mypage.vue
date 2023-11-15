@@ -36,9 +36,9 @@
 					<view class="tag_detail">奖项多</view>
 				</view>
 			</view>
-			<view class="items3-each">
+			<view class="items3-each2">
 				<view class="pingjia">
-					<image class="pingjia-image" src="../static/add.png"></image>
+					<image class="pingjia-image" src="../static/jishupingfen.png"></image>
 					<view class="pingfen">
 						评分
 					</view>
@@ -193,7 +193,13 @@
 		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.10);
 	}
 	.items3-each{
-		width: 45vw;
+		width: 28vw;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.items3-each2{
+		width: 55vw;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -207,7 +213,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		justify-content: space-around;
+		justify-content: center;
 		/* background-color: aqua; */
 		/* border-style: solid; */
 		height: 25vh;
@@ -223,11 +229,12 @@
 		border-radius: 2.5vh;
 		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
 		font-size: 40rpx;
-		width: 17vw;
+		width: 22vw;
 	}
 	.pingjia-image{
-		width: 150rpx;
-		height: 150rpx;
+		margin-top: 2vh;
+		width: 400rpx;
+		height: 300rpx;
 		
 	}
 	.pingjia{
@@ -237,10 +244,10 @@
 		justify-content: center;
 		/* border-style: solid; */
 		/* background-color: aqua; */
-		height: 25vh;
-		width: 35vw;
+		height: 30vh;
+		width: 70vw;
 	}
 	.pingfen{
-		margin: 3vw;
+		margin: 2vw;
 	}
 </style>
