@@ -39,9 +39,9 @@
 			<view class="items3-each2">
 				<view class="pingjia">
 					<image class="pingjia-image" src="../static/jishupingfen.png"></image>
-					<view class="pingfen">
+					<!-- <view class="pingfen">
 						评分
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
@@ -193,13 +193,15 @@
 		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.10);
 	}
 	.items3-each{
-		width: 28vw;
+		width: 23vw;
+		margin-left: 3vw;
+		margin-right: 0vw;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
 	.items3-each2{
-		width: 55vw;
+		width: auto;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -228,13 +230,12 @@
 		color: rgb(52,120,246);
 		border-radius: 2.5vh;
 		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.35);
-		font-size: 40rpx;
-		width: 22vw;
+		font-size: 35rpx;
+		width: 20vw;
 	}
 	.pingjia-image{
-		margin-top: 2vh;
-		width: 400rpx;
-		height: 300rpx;
+		width: 440rpx;
+		height: 330rpx;
 		
 	}
 	.pingjia{
