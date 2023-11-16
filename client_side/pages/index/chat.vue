@@ -36,7 +36,7 @@
 								{{el.title}}
 							</view>
 							<view class="chat-child-wrap">
-								<view class="chat-content">
+								<view class="chat-content-me">
 									{{el.content}}
 								</view>
 								<image class="duixiang-image" src="/static/logo.png"></image>
@@ -62,7 +62,7 @@
 								{{el.title}}
 							</view>
 							<view class="chat-child-wrap">
-								<view class="chat-content">
+								<view class="chat-content-me">
 									{{el.content}}
 								</view>
 								<image class="duixiang-image" src="/static/logo.png"></image>
@@ -106,17 +106,17 @@
 				chats:[
 					{
 						ownedBySelf : false,
-						title : "fff",
+						title : "头衔1",
 						content : "abcdefg",
 					},
 					{
 						ownedBySelf : false,
-						title : "aaabbb",
-						content : "asdasd\nasdasd\nasd",
+						title : "头衔2",
+						content : "asdasdasdasd\nasd",
 					},
 					{
 						ownedBySelf : true,
-						title : "ok",
+						title : "头衔3",
 						content : "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
 					},
 				],
@@ -150,6 +150,7 @@
 		width: 17vw;
 		height: 100vh;
 		border-right-style: ridge;
+		background-color: rgb(241,241,241);
 		/* background-color: antiquewhite; */
 	}
 	.user-picture{
@@ -167,9 +168,12 @@
 		width: 18vw;
 	}
 	.duixiang-image{
-		width: 120rpx;
-		height: 120rpx;
-		margin-top: 1vh;
+		width: 90rpx;
+		height: 90rpx;
+		margin-top: 1.5vh;
+		border-radius: 50%;
+		margin-left: 2rpx;
+		margin-right: 2rpx;
 	}
 	.right{
 		display: flex;
@@ -178,7 +182,7 @@
 		/* justify-content: center; */
 		width: 83vw;
 		height: 100vh;
-		/* background-color: cadetblue; */
+		background-color: rgb(241,241,241);
 	}
 	.richeng-tixing{
 		display: flex;
@@ -299,14 +303,31 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
+		margin-top: 1vh;
 	}
 	.chat-content-other{
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
+		margin-top:1vh;
 	}
 	.chat-content{
-		margin-top: 20rpx;
+		margin-top: 40rpx;
+		margin-left:15rpx;
+		white-space: pre-line;
+		word-break: break-all;
+		border-width: 3rpx;
+		/* border-style: solid; */
+		border-radius: 3vw;
+		width: fit-content;
+		max-width: 70%;
+		height: fit-content;
+		padding: 12rpx;
+		background-color: white;
+	}
+	.chat-content-me{
+		margin-top: 40rpx;
+		margin-right:15rpx;
 		white-space: pre-line;
 		word-break: break-all;
 		border-width: 3rpx;
@@ -316,6 +337,8 @@
 		max-width: 65%;
 		height: fit-content;
 		padding: 12rpx;
+		background-color: rgb(18,183,245);
+		color:white;
 	}
 	.chat-content-self .chat-child-wrap{
 		display: flex;
@@ -327,10 +350,16 @@
 	}
 	.peer-title{
 		width: fit-content;
-		height: 1rem;
+		height: fit-content;
 		margin-top: 0rpx;
-		margin-left: 20rpx;
-		margin-right: 20rpx;
+		margin-left: 10rpx;
+		margin-right: 10rpx;
 		margin-bottom: -10rpx;
+		font-size: 28rpx;
+		background-color: rgb(121,228,218);
+		color:white;
+		font-weight: 700;
+		border-radius: 10rpx;
+		padding: 2rpx;
 	}
 </style>
